@@ -20,14 +20,12 @@ body {
   margin: 0 auto;
   min-height: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
   position: relative;
 }
 
 #root {
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 }
 
