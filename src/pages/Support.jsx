@@ -10,6 +10,12 @@ import ChatBubble from "../components/ui/ChatBubble";
 import { ArrowLeft, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const QUICK_PROMPTS = [
+  "How do I make a transfer?",
+  "My transaction is pending",
+  "I need help with my account",
+];
+
 const Support = () => {
   const { currentUser, userData } = useAuth();
   const navigate = useNavigate();
@@ -18,6 +24,7 @@ const Support = () => {
   const [sending, setSending] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const bottomRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -32,9 +39,9 @@ const Support = () => {
       setUnreadCount(unread);
       msgs
         .filter((m) => m.sender === "admin" && !m.read)
-        .forEach((m) => {
-          updateDoc(doc(db, "chats", currentUser.uid, "messages", m.id), { read: true });
-        });
+        .forEach((m) =>
+          updateDoc(doc(db, "chats", currentUser.uid, "messages", m.id), { read: true })
+        );
     });
     return unsub;
   }, [currentUser]);
@@ -44,27 +51,45 @@ const Support = () => {
   }, [messages]);
 
   const sendMessage = async () => {
-    if (!text.trim()) return;
+    if (!text.trim() || sending) return;
     setSending(true);
+    const content = text.trim();
+    setText("");
     await addDoc(collection(db, "chats", currentUser.uid, "messages"), {
-      text: text.trim(),
+      text: content,
       sender: "user",
       senderName: userData?.fullName || "User",
       timestamp: serverTimestamp(),
       read: false,
     });
-    setText("");
     setSending(false);
+    inputRef.current?.focus();
+  };
+
+  const handleQuickPrompt = (prompt) => {
+    setText(prompt);
+    inputRef.current?.focus();
   };
 
   return (
-    <div style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column", paddingBottom: 88 }}>
+    <div style={{
+      position: "fixed",
+      inset: 0,
+      maxWidth: 430,
+      margin: "0 auto",
+      display: "flex",
+      flexDirection: "column",
+      background: "#f0f1f8",
+      overflow: "hidden",
+    }}>
 
       {/* ── HEADER ── */}
-      <div style={{ background: "linear-gradient(160deg, #3730a3 0%, #4f46e5 100%)", padding: "52px 20px 20px" }}>
+      <div style={{
+        flexShrink: 0,
+        background: "linear-gradient(160deg, #3730a3 0%, #5b5bd6 100%)",
+        padding: "52px 20px 18px",
+      }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-
-          {/* back */}
           <button
             onClick={() => navigate("/dashboard")}
             style={{
@@ -78,7 +103,6 @@ const Support = () => {
             <ArrowLeft size={17} />
           </button>
 
-          {/* agent info */}
           <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
             <div style={{ position: "relative", flexShrink: 0 }}>
               <div style={{
@@ -86,28 +110,26 @@ const Support = () => {
                 background: "rgba(255,255,255,0.18)",
                 border: "2px solid rgba(255,255,255,0.3)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 16, fontWeight: 700, color: "#fff",
+                fontSize: 16, fontWeight: 800, color: "#fff",
               }}>
                 M
               </div>
               <span style={{
                 position: "absolute", bottom: 1, right: 1,
                 width: 11, height: 11, borderRadius: "50%",
-                background: "#34d399",
-                border: "2px solid #4338ca",
+                background: "#34d399", border: "2px solid #4338ca",
               }} />
             </div>
             <div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: 0, lineHeight: 1.3 }}>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: 0 }}>
                 Milestone Support
               </p>
-              <p style={{ fontSize: 10, fontWeight: 600, color: "#6ee7b7", margin: 0, letterSpacing: "0.2px" }}>
+              <p style={{ fontSize: 10, fontWeight: 600, color: "#6ee7b7", margin: 0 }}>
                 Online · replies within minutes
               </p>
             </div>
           </div>
 
-          {/* unread badge */}
           {unreadCount > 0 && (
             <div style={{
               background: "#ef4444", color: "#fff",
@@ -123,48 +145,57 @@ const Support = () => {
       </div>
 
       {/* ── MESSAGES ── */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 0" }}>
-
+      <div style={{
+        flex: 1,
+        overflowY: "auto",
+        padding: "16px 16px 8px",
+        WebkitOverflowScrolling: "touch",
+      }}>
         {messages.length === 0 && (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingTop: 60, paddingBottom: 40 }}>
-            {/* icon card */}
+          <div style={{
+            display: "flex", flexDirection: "column",
+            alignItems: "center", paddingTop: 48, paddingBottom: 24,
+          }}>
             <div style={{
               width: 72, height: 72, borderRadius: 22,
-              background: "#fff",
-              border: "1px solid #e8eaf0",
+              background: "#fff", border: "1px solid #e8eaf0",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 30, marginBottom: 16,
+              boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
             }}>
               💬
             </div>
             <p style={{ fontSize: 15, fontWeight: 700, color: "#111827", margin: "0 0 6px" }}>
               How can we help?
             </p>
-            <p style={{ fontSize: 12, color: "#9ca3af", fontWeight: 500, textAlign: "center", maxWidth: 220, lineHeight: 1.6, margin: 0 }}>
+            <p style={{
+              fontSize: 12, color: "#9ca3af", fontWeight: 500,
+              textAlign: "center", maxWidth: 220, lineHeight: 1.65, margin: 0,
+            }}>
               Send us a message and our support team will get back to you shortly.
             </p>
-
-            {/* quick prompts */}
             <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 24, width: "100%" }}>
-              {[
-                "How do I make a transfer?",
-                "My transaction is pending",
-                "I need help with my account",
-              ].map((prompt) => (
+              {QUICK_PROMPTS.map((p) => (
                 <button
-                  key={prompt}
-                  onClick={() => setText(prompt)}
+                  key={p}
+                  onClick={() => handleQuickPrompt(p)}
                   style={{
-                    width: "100%", padding: "11px 16px",
-                    borderRadius: 12,
-                    background: "#fff",
-                    border: "1px solid #e8eaf0",
-                    fontSize: 13, fontWeight: 500, color: "#4f46e5",
-                    textAlign: "left", cursor: "pointer",
-                    fontFamily: "inherit",
+                    width: "100%", padding: "12px 16px", borderRadius: 14,
+                    background: "#fff", border: "1px solid #e8eaf0",
+                    fontSize: 13, fontWeight: 600, color: "#4f46e5",
+                    textAlign: "left", cursor: "pointer", fontFamily: "inherit",
+                    display: "flex", alignItems: "center", gap: 10,
                   }}
                 >
-                  {prompt}
+                  <span style={{
+                    width: 28, height: 28, borderRadius: 8,
+                    background: "#eef2ff",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0, fontSize: 14,
+                  }}>
+                    {p.includes("transfer") ? "↔" : p.includes("pending") ? "⏳" : "👤"}
+                  </span>
+                  {p}
                 </button>
               ))}
             </div>
@@ -174,40 +205,41 @@ const Support = () => {
         {messages.map((msg) => (
           <ChatBubble key={msg.id} message={msg} isUser={msg.sender === "user"} />
         ))}
-        <div ref={bottomRef} />
+        <div ref={bottomRef} style={{ height: 8 }} />
       </div>
 
       {/* ── INPUT BAR ── */}
       <div style={{
-        position: "fixed", bottom: 68, left: "50%", transform: "translateX(-50%)",
-        width: "100%", maxWidth: 480,
+        flexShrink: 0,
         background: "#fff",
         borderTop: "1px solid #f0f1f8",
         padding: "10px 16px",
-        zIndex: 30,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <input
+            ref={inputRef}
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
             placeholder="Type a message..."
             style={{
-              flex: 1, height: 44, borderRadius: 22,
-              border: "1px solid #e5e7eb",
+              flex: 1, height: 46, borderRadius: 23,
+              border: "1.5px solid #e5e7eb",
               background: "#f9fafb",
-              padding: "0 16px",
+              padding: "0 18px",
               fontSize: 14, color: "#111827",
               outline: "none", fontFamily: "inherit",
               transition: "border-color 0.15s",
             }}
+            onFocus={(e) => e.target.style.borderColor = "#6366f1"}
+            onBlur={(e) => e.target.style.borderColor = "#e5e7eb"}
           />
           <button
             onClick={sendMessage}
             disabled={sending || !text.trim()}
             style={{
-              width: 44, height: 44, flexShrink: 0,
+              width: 46, height: 46, flexShrink: 0,
               borderRadius: "50%",
               background: sending || !text.trim()
                 ? "#e0e7ff"
@@ -216,16 +248,20 @@ const Support = () => {
               display: "flex", alignItems: "center", justifyContent: "center",
               color: sending || !text.trim() ? "#a5b4fc" : "#fff",
               cursor: sending || !text.trim() ? "not-allowed" : "pointer",
-              transition: "all 0.15s",
+              transition: "all 0.2s",
+              boxShadow: sending || !text.trim() ? "none" : "0 4px 14px rgba(79,70,229,0.35)",
             }}
             aria-label="Send message"
           >
-            <Send size={16} />
+            <Send size={17} />
           </button>
         </div>
       </div>
 
-      <BottomNav unreadSupport={unreadCount > 0} />
+      {/* ── BOTTOM NAV ── */}
+      <div style={{ flexShrink: 0 }}>
+        <BottomNav unreadSupport={unreadCount > 0} />
+      </div>
     </div>
   );
 };

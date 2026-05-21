@@ -1,15 +1,34 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
 
 body {
-  background-color: #f8f8fb;
+  background-color: #f0f1f8;
   font-family: 'Inter', system-ui, sans-serif;
   max-width: 430px;
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+#root {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
 }
 
 @keyframes slide-up {
