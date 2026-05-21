@@ -50,11 +50,11 @@ const Support = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = async () => {
-    if (!text.trim() || sending) return;
+  const sendMessage = async (messageText) => {
+    const content = (messageText || text).trim();
+    if (!content || sending) return;
     setSending(true);
-    const content = text.trim();
-    setText("");
+    if (!messageText) setText("");
     await addDoc(collection(db, "chats", currentUser.uid, "messages"), {
       text: content,
       sender: "user",
@@ -67,8 +67,7 @@ const Support = () => {
   };
 
   const handleQuickPrompt = (prompt) => {
-    setText(prompt);
-    inputRef.current?.focus();
+    sendMessage(prompt);
   };
 
   return (
