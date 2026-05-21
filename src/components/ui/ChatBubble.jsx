@@ -4,68 +4,24 @@ const ChatBubble = ({ message, isUser }) => {
     : "";
 
   return (
-    <div style={{
-      display: "flex",
-      justifyContent: isUser ? "flex-end" : "flex-start",
-      alignItems: "flex-end",
-      gap: 8,
-      marginBottom: 12,
-    }}>
-      {/* Admin avatar */}
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-3`}>
       {!isUser && (
-        <div style={{
-          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
-          background: "linear-gradient(135deg, #4f46e5, #6366f1)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 10, fontWeight: 800, color: "#fff",
-          boxShadow: "0 2px 8px rgba(79,70,229,0.3)",
-        }}>
-          M
+        <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center mr-2 mt-1 shrink-0">
+          <span className="text-white text-[10px] font-bold">M</span>
         </div>
       )}
-
-      <div style={{ maxWidth: "72%", display: "flex", flexDirection: "column", alignItems: isUser ? "flex-end" : "flex-start" }}>
-        {/* Bubble */}
-        <div style={{
-          padding: "10px 14px",
-          borderRadius: isUser ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-          background: isUser
-            ? "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)"
-            : "#fff",
-          color: isUser ? "#fff" : "#111827",
-          fontSize: 14,
-          lineHeight: 1.55,
-          boxShadow: isUser
-            ? "0 4px 16px rgba(79,70,229,0.25)"
-            : "0 1px 4px rgba(0,0,0,0.07)",
-          border: isUser ? "none" : "1px solid #f0f0f8",
-          wordBreak: "break-word",
-        }}>
-          <p style={{ margin: 0 }}>{message.text}</p>
-        </div>
-
-        {/* Time */}
+      <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+        isUser
+          ? "bg-indigo-600 text-white rounded-br-sm"
+          : "bg-white text-gray-800 rounded-bl-sm shadow-sm border border-gray-100"
+      }`}>
+        <p>{message.text}</p>
         {time && (
-          <span style={{
-            fontSize: 10, color: "#9ca3af", fontWeight: 500,
-            marginTop: 4, paddingLeft: isUser ? 0 : 2, paddingRight: isUser ? 2 : 0,
-          }}>
+          <p className={`text-[10px] mt-1 ${isUser ? "text-indigo-200" : "text-gray-400"} text-right`}>
             {time}
-          </span>
+          </p>
         )}
       </div>
-
-      {/* User avatar */}
-      {isUser && (
-        <div style={{
-          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
-          background: "#e0e7ff",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 10, fontWeight: 800, color: "#4f46e5",
-        }}>
-          U
-        </div>
-      )}
     </div>
   );
 };
