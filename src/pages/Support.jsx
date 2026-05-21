@@ -213,52 +213,45 @@ const Support = () => {
 
       {/* ── INPUT BAR ── */}
       <div style={{
-        flexShrink: 0,
-        background: "#fff",
-        borderTop: "1px solid #f0f1f8",
-        padding: "10px 16px",
+        display: "flex", alignItems: "center", gap: 10,
+        padding: "10px 16px", borderTop: "1px solid #f0f1f8",
+        background: "#fff", flexShrink: 0,
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <input
-            ref={inputRef}
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
-            placeholder="Type a message..."
-            style={{
-              flex: 1, height: 46, borderRadius: 23,
-              border: "1.5px solid #e5e7eb",
-              background: "#f9fafb",
-              padding: "0 18px",
-              fontSize: 14, color: "#111827",
-              outline: "none", fontFamily: "inherit",
-              transition: "border-color 0.15s",
-            }}
-            onFocus={(e) => e.target.style.borderColor = "#6366f1"}
-            onBlur={(e) => e.target.style.borderColor = "#e5e7eb"}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={sending || !text.trim()}
-            style={{
-              width: 46, height: 46, flexShrink: 0,
-              borderRadius: "50%",
-              background: sending || !text.trim()
-                ? "#e0e7ff"
-                : "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)",
-              border: "none",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: sending || !text.trim() ? "#a5b4fc" : "#fff",
-              cursor: sending || !text.trim() ? "not-allowed" : "pointer",
-              transition: "all 0.2s",
-              boxShadow: sending || !text.trim() ? "none" : "0 4px 14px rgba(79,70,229,0.35)",
-            }}
-            aria-label="Send message"
-          >
-            <Send size={17} />
-          </button>
-        </div>
+        <input
+          ref={inputRef}
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter") sendMessage(); }}
+          placeholder="Type a message..."
+          style={{
+            flex: 1, height: 42, borderRadius: 21,
+            border: "1.5px solid #e5e7eb", background: "#f9fafb",
+            padding: "0 16px", fontSize: 14, color: "#111827",
+            outline: "none", fontFamily: "inherit", transition: "border-color 0.15s",
+          }}
+          onFocus={(e) => e.target.style.borderColor = "#6366f1"}
+          onBlur={(e) => e.target.style.borderColor = "#e5e7eb"}
+        />
+        <button
+          onClick={sendMessage}
+          disabled={sending || !text.trim()}
+          style={{
+            width: 42, height: 42, flexShrink: 0,
+            borderRadius: "50%",
+            background: sending || !text.trim()
+              ? "#e0e7ff"
+              : "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)",
+            border: "none",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: sending || !text.trim() ? "#a5b4fc" : "#fff",
+            cursor: sending || !text.trim() ? "not-allowed" : "pointer",
+            boxShadow: sending || !text.trim() ? "none" : "0 4px 12px rgba(79,70,229,0.3)",
+            transition: "all 0.15s",
+          }}
+        >
+          <Send size={15} />
+        </button>
       </div>
 
       {/* ── BOTTOM NAV ── */}
