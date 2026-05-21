@@ -149,11 +149,13 @@ const Support = () => {
         overflowY: "auto",
         padding: "16px 16px 8px",
         WebkitOverflowScrolling: "touch",
+        display: "flex",
+        flexDirection: "column",
       }}>
-        {messages.length === 0 && (
+        {messages.length === 0 ? (
           <div style={{
             display: "flex", flexDirection: "column",
-            alignItems: "center", paddingTop: 48, paddingBottom: 24,
+            alignItems: "center", justifyContent: "center", flex: 1,
           }}>
             <div style={{
               width: 72, height: 72, borderRadius: 22,
@@ -173,7 +175,7 @@ const Support = () => {
             }}>
               Send us a message and our support team will get back to you shortly.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 24, width: "100%" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 24, width: "100%", maxWidth: 280 }}>
               {QUICK_PROMPTS.map((p) => (
                 <button
                   key={p}
@@ -199,12 +201,14 @@ const Support = () => {
               ))}
             </div>
           </div>
+        ) : (
+          <>
+            {messages.map((msg) => (
+              <ChatBubble key={msg.id} message={msg} isUser={msg.sender === "user"} />
+            ))}
+            <div ref={bottomRef} style={{ height: 8 }} />
+          </>
         )}
-
-        {messages.map((msg) => (
-          <ChatBubble key={msg.id} message={msg} isUser={msg.sender === "user"} />
-        ))}
-        <div ref={bottomRef} style={{ height: 8 }} />
       </div>
 
       {/* ── INPUT BAR ── */}
