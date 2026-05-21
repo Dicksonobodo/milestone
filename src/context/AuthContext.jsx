@@ -5,7 +5,7 @@ import { getUser } from "../firebase/firestore";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, userData, loading, refreshUserData }}>
+    <AuthContext.Provider
+      value={{ currentUser, userData, loading, refreshUserData }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   );
