@@ -5,61 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Milestone</title>
-    <style>
-      /* Keep the Smartsupp launcher above the bottom navigation */
-      #smartsupp-widget-container {
-        bottom: 96px !important;
-        right: 16px !important;
-        z-index: 2147483647 !important;
-      }
-
-      #smartsupp-widget-container [data-testid="widgetButtonFrame"],
-      #smartsupp-widget-container iframe#widgetButtonFrame {
-        bottom: 96px !important;
-        right: 16px !important;
-        left: auto !important;
-        z-index: 2147483647 !important;
-      }
-    </style>
-    <script>
-      const applySmartsuppLayout = () => {
-        const container = document.getElementById('smartsupp-widget-container');
-        if (container) {
-          container.style.setProperty('bottom', '96px', 'important');
-          container.style.setProperty('right', '16px', 'important');
-          container.style.setProperty('z-index', '2147483647', 'important');
-        }
-
-        const buttonFrame = document.querySelector('#smartsupp-widget-container [data-testid="widgetButtonFrame"]');
-        if (buttonFrame) {
-          buttonFrame.style.setProperty('bottom', '96px', 'important');
-          buttonFrame.style.setProperty('right', '16px', 'important');
-          buttonFrame.style.setProperty('left', 'auto', 'important');
-          buttonFrame.style.setProperty('z-index', '2147483647', 'important');
-        }
-
-        const buttonIframe = document.querySelector('#smartsupp-widget-container iframe#widgetButtonFrame');
-        if (buttonIframe) {
-          buttonIframe.style.setProperty('bottom', '96px', 'important');
-          buttonIframe.style.setProperty('right', '16px', 'important');
-          buttonIframe.style.setProperty('left', 'auto', 'important');
-          buttonIframe.style.setProperty('z-index', '2147483647', 'important');
-        }
-      };
-
-      const initSmartsuppPositioning = () => {
-        applySmartsuppLayout();
-        const observer = new MutationObserver(applySmartsuppLayout);
-        observer.observe(document.body, { childList: true, subtree: true });
-        window.addEventListener('load', applySmartsuppLayout);
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSmartsuppPositioning);
-      } else {
-        initSmartsuppPositioning();
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>
