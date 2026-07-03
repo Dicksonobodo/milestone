@@ -5,6 +5,42 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Milestone</title>
+    <style>
+      [id*="smartsupp"],
+      [class*="smartsupp"],
+      iframe[src*="smartsupp"] {
+        position: fixed !important;
+        bottom: 180px !important;
+        right: 16px !important;
+        z-index: 9999 !important;
+      }
+    </style>
+    <script>
+      const repositionSmartsupp = () => {
+        const candidates = document.querySelectorAll(
+          'iframe[src*="smartsupp"], div[id*="smartsupp"], div[class*="smartsupp"], [id*="smartsupp-widget"], [class*="smartsupp-widget"]'
+        );
+
+        candidates.forEach((el) => {
+          el.style.setProperty('position', 'fixed', 'important');
+          el.style.setProperty('bottom', '180px', 'important');
+          el.style.setProperty('right', '16px', 'important');
+          el.style.setProperty('z-index', '9999', 'important');
+        });
+      };
+
+      const initSmartsuppPositioning = () => {
+        repositionSmartsupp();
+        const observer = new MutationObserver(repositionSmartsupp);
+        observer.observe(document.body, { childList: true, subtree: true });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSmartsuppPositioning);
+      } else {
+        initSmartsuppPositioning();
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
