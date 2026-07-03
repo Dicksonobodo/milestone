@@ -14,12 +14,12 @@ const BottomNav = ({ unreadSupport = false }) => {
   const navigate = useNavigate();
 
   return (
-    <nav style={{
-      position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)",
-      width: "100%", maxWidth: "430px", background: "#fff",
-      borderTop: "1px solid #f0f0f8", display: "flex", zIndex: 40,
-      padding: "10px 0 16px", marginRight: "56px"
-    }}>
+   <nav style={{
+  position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)",
+  width: "100%", maxWidth: "430px", background: "#fff",
+  borderTop: "1px solid #f0f0f8", display: "flex", zIndex: 40,
+  padding: "10px 56px 16px 0", boxSizing: "border-box"
+}}>
       {tabs.map(({ to, icon: Icon, label }) => {
         const active = location.pathname === to;
         return (
