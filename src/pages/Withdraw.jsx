@@ -29,8 +29,8 @@ const Withdraw = () => {
   const handleWithdraw = () => {
     if (!isTier2) return setShowTierSheet(true);
     const num = parseFloat(amount);
-    if (!amount || isNaN(num) || num <= 0) return setError("Enter a valid amount.");
-    if (num > (userData?.balance || 0)) return setError("Insufficient balance.");
+    if (!amount || isNaN(num) || num <= 0) return setError("Inserisci un importo valido.");
+    if (num > (userData?.balance || 0)) return setError("Saldo insufficiente.");
     setError("");
     setShowConfirmSheet(true);
   };
@@ -39,7 +39,7 @@ const Withdraw = () => {
     setLoading(true);
     await withdrawFunds(userData.uid, parseFloat(amount));
     await refreshUserData();
-    setSuccess(`$${parseFloat(amount).toLocaleString()} withdrawn successfully!`);
+    setSuccess(`$${parseFloat(amount).toLocaleString()} ritirato con successo!`);
     setAmount("");
     setShowConfirmSheet(false);
     setLoading(false);
@@ -94,7 +94,7 @@ const Withdraw = () => {
             <ArrowLeft size={17} />
           </button>
           <span style={{ fontSize: 16, fontWeight: 700, color: "#fff", letterSpacing: "-0.2px" }}>
-            Withdraw funds
+            Ritira fondi
           </span>
         </div>
 
@@ -109,11 +109,11 @@ const Withdraw = () => {
             : <Lock size={18} color="#fcd34d" style={{ flexShrink: 0 }} />}
           <div>
             <p style={{ fontSize: 13, fontWeight: 700, color: isTier2 ? "#6ee7b7" : "#fcd34d", margin: 0, lineHeight: 1.3 }}>
-              {isTier2 ? "Tier 2 — Withdrawals enabled" : "Tier 1 — Upgrade required"}
+              {isTier2 ? "Tier 2 — Prelievi abilitati" : "Tier 1 — Aggiornamento richiesto"}
             </p>
             {!isTier2 && (
               <p style={{ fontSize: 10, color: "rgba(253,211,77,0.7)", margin: "2px 0 0" }}>
-                Contact support to upgrade your account
+                Contatta il supporto per aggiornare il tuo account
               </p>
             )}
           </div>
@@ -128,7 +128,7 @@ const Withdraw = () => {
           padding: "16px 20px", marginBottom: 12, textAlign: "center",
         }}>
           <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.4px", textTransform: "uppercase", margin: "0 0 4px" }}>
-            Available balance
+            Saldo disponibile
           </p>
           <p style={{ fontSize: 28, fontWeight: 700, color: "#111827", letterSpacing: "-0.5px", margin: 0 }}>
             ${balance}
@@ -141,7 +141,7 @@ const Withdraw = () => {
           padding: "16px 20px", marginBottom: 12,
         }}>
           <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.4px", textTransform: "uppercase", margin: "0 0 10px" }}>
-            Amount to withdraw
+            Importo da ritirare
           </p>
           <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
             <span style={{ fontSize: 24, fontWeight: 700, color: "#6366f1" }}>$</span>
@@ -262,7 +262,7 @@ const Withdraw = () => {
                     }}
                   >
                     <MessageCircle size={15} />
-                    Go to support
+                    Vai al supporto
                   </button>
                 </div>
               </>
@@ -277,7 +277,7 @@ const Withdraw = () => {
                   <Lock size={30} color="#f97316" />
                 </div>
                 <p style={{ fontSize: 18, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px", letterSpacing: "-0.3px" }}>
-                  Upgrade to Tier 2
+                  Aggiorna a Tier 2
                 </p>
                 <p style={{ fontSize: 13, color: "#9ca3af", textAlign: "center", margin: "0 0 20px", lineHeight: 1.6 }}>
                   Unlock withdrawals and premium banking features — completely free.
@@ -303,7 +303,7 @@ const Withdraw = () => {
                 </div>
 
                 <div style={{ display: "flex", gap: 10 }}>
-                  <button onClick={() => setShowTierSheet(false)} style={cancelBtn}>Cancel</button>
+                  <button onClick={() => setShowTierSheet(false)} style={cancelBtn}>Annulla</button>
                   <button
                     onClick={handleContactSupport}
                     style={{
@@ -315,7 +315,7 @@ const Withdraw = () => {
                     }}
                   >
                     <MessageCircle size={15} />
-                    Contact support
+                    Contatta supporto
                   </button>
                 </div>
               </>
@@ -363,7 +363,7 @@ const Withdraw = () => {
                 border: "none", fontSize: 14, fontWeight: 700, color: "#fff",
                 cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit",
               }}>
-                {loading ? "Processing..." : "Confirm withdrawal"}
+                {loading ? "Elaborazione..." : "Conferma prelievo"}
               </button>
             </div>
           </div>

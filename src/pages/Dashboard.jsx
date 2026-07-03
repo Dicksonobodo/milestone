@@ -20,9 +20,9 @@ const Dashboard = () => {
         {/* Top row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
           <div>
-            <p style={{ fontSize: "12px", color: "#aaa", fontWeight: 500 }}>Welcome back</p>
+            <p style={{ fontSize: "12px", color: "#aaa", fontWeight: 500 }}>Bentornato</p>
             <h1 style={{ fontSize: "22px", fontWeight: 800, color: "#1a1a2e", marginTop: "2px" }}>
-              {userData?.fullName?.split(" ")[0] || "User"}
+              {userData?.fullName?.split(" ")[0] || "Utente"}
             </h1>
           </div>
           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -45,13 +45,13 @@ const Dashboard = () => {
             onClick={() => navigate("/transfer")}
             style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "14px", borderRadius: "14px", background: "#5b5bd6", color: "#fff", fontSize: "13px", fontWeight: 700, border: "none", cursor: "pointer" }}
           >
-            Transfer ➤
+            Trasferisci ➤
           </button>
           <button
             onClick={() => navigate("/withdraw")}
             style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "14px", borderRadius: "14px", background: "#f5f5fb", color: "#5b5bd6", fontSize: "13px", fontWeight: 700, border: "1.5px solid #e8e8f8", cursor: "pointer" }}
           >
-            Withdraw ⊞
+            Ritira ⊞
           </button>
         </div>
       </div>
@@ -59,19 +59,19 @@ const Dashboard = () => {
       {/* Chart */}
       <div style={{ margin: "16px", background: "#fff", borderRadius: "20px", padding: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}>March, 2023</span>
-          <span style={{ fontSize: "11px", color: "#aaa", fontWeight: 600 }}>Monthly ▾</span>
+          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}>Marzo, 2023</span>
+          <span style={{ fontSize: "11px", color: "#aaa", fontWeight: 600 }}>Mensile ▾</span>
         </div>
         <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
-          <button style={{ padding: "6px 14px", borderRadius: "20px", background: "#5b5bd6", color: "#fff", fontSize: "11px", fontWeight: 700, border: "none", cursor: "pointer" }}>Expenses</button>
-          <button style={{ padding: "6px 14px", borderRadius: "20px", background: "#f0f0f8", color: "#aaa", fontSize: "11px", fontWeight: 700, border: "none", cursor: "pointer" }}>Savings</button>
+          <button style={{ padding: "6px 14px", borderRadius: "20px", background: "#5b5bd6", color: "#fff", fontSize: "11px", fontWeight: 700, border: "none", cursor: "pointer" }}>Spese</button>
+          <button style={{ padding: "6px 14px", borderRadius: "20px", background: "#f0f0f8", color: "#aaa", fontSize: "11px", fontWeight: 700, border: "none", cursor: "pointer" }}>Risparmi</button>
         </div>
         <BalanceChart transactions={transactions} />
         <div style={{ display: "flex", gap: "8px", marginTop: "12px", overflowX: "auto", paddingBottom: "4px" }}>
           {[
-            { icon: Plane, l: "Travel", a: "$0.00", color: "#FF9500" },
-            { icon: TrendingUp, l: "Investment", a: "$0.00", color: "#34C759" },
-            { icon: Utensils, l: "Food", a: "$0.00", color: "#FF3B30" }
+            { icon: Plane, l: "Viaggio", a: "$0.00", color: "#FF9500" },
+            { icon: TrendingUp, l: "Investimento", a: "$0.00", color: "#34C759" },
+            { icon: Utensils, l: "Cibo", a: "$0.00", color: "#FF3B30" }
           ].map((c) => (
             <div key={c.l} style={{ flexShrink: 0, background: "#f8f8fb", borderRadius: "14px", padding: "10px 12px", minWidth: "82px" }}>
               <div style={{ marginBottom: "4px", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -87,13 +87,13 @@ const Dashboard = () => {
       {/* Transactions */}
       <div style={{ margin: "0 16px", background: "#fff", borderRadius: "20px", padding: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}>Transactions</span>
-          <span style={{ fontSize: "11px", color: "#5b5bd6", fontWeight: 700, cursor: "pointer" }}>See all</span>
+          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}>Transazioni</span>
+          <span style={{ fontSize: "11px", color: "#5b5bd6", fontWeight: 700, cursor: "pointer" }}>Vedi tutto</span>
         </div>
         {loading ? (
-          <p style={{ textAlign: "center", color: "#aaa", fontSize: "13px", padding: "24px 0" }}>Loading...</p>
+          <p style={{ textAlign: "center", color: "#aaa", fontSize: "13px", padding: "24px 0" }}>Caricamento...</p>
         ) : transactions.length === 0 ? (
-          <p style={{ textAlign: "center", color: "#aaa", fontSize: "13px", padding: "24px 0" }}>No transactions yet</p>
+          <p style={{ textAlign: "center", color: "#aaa", fontSize: "13px", padding: "24px 0" }}>Nessuna transazione ancora</p>
         ) : (
           transactions.slice(0, 5).map((txn) => <TransactionItem key={txn.id} transaction={txn} />)
         )}

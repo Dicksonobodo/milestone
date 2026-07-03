@@ -31,13 +31,13 @@ const BankCard = ({ balance = 0, cardNumber = "3245", validThru = "08/30" }) => 
       {/* Bottom: balance + valid */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
         <div>
-          <div style={{ fontSize: "9px", color: "rgba(255,255,255,.5)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "2px" }}>Balance</div>
+          <div style={{ fontSize: "9px", color: "rgba(255,255,255,.5)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "2px" }}>Saldo</div>
           <div style={{ fontSize: "22px", fontWeight: 800, color: "#fff" }}>
             $ {Number(balance).toLocaleString("en-US", { minimumFractionDigits: 2 })}
           </div>
         </div>
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: "9px", color: "rgba(255,255,255,.5)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "2px" }}>Valid thru</div>
+          <div style={{ fontSize: "9px", color: "rgba(255,255,255,.5)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "2px" }}>Valido fino</div>
           <div style={{ fontSize: "11px", fontWeight: 700, color: "rgba(255,255,255,.8)" }}>{validThru}</div>
         </div>
       </div>

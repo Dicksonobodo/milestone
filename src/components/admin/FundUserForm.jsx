@@ -37,13 +37,13 @@ const FundUserForm = () => {
   };
 
   const handleFund = async () => {
-    if (!selectedUid) return setError("Please select a user.");
-    if (!amount || isNaN(amount) || Number(amount) <= 0) return setError("Enter a valid amount.");
+    if (!selectedUid) return setError("Seleziona un utente.");
+    if (!amount || isNaN(amount) || Number(amount) <= 0) return setError("Inserisci un importo valido.");
     setError("");
     setLoading(true);
     await fundUserAccount(selectedUid, Number(amount), currentUser.uid);
     const user = users.find((u) => u.uid === selectedUid);
-    setSuccess(`$${Number(amount).toLocaleString()} funded to ${user?.fullName}!`);
+    setSuccess(`$${Number(amount).toLocaleString()} finanziati a ${user?.fullName}!`);
     setAmount("");
     setSelectedUid("");
     setLoading(false);
@@ -51,12 +51,12 @@ const FundUserForm = () => {
   };
 
   const handleUpgradeTier = async () => {
-    if (!selectedUid) return setError("Please select a user first.");
+    if (!selectedUid) return setError("Seleziona prima un utente.");
     setError("");
     setUpgrading(true);
     await upgradeToTier2(selectedUid);
     const user = users.find((u) => u.uid === selectedUid);
-    setSuccess(`${user?.fullName} upgraded to Tier 2!`);
+    setSuccess(`${user?.fullName} aggiornato a Tier 2!`);
     // update local state so badge reflects immediately
     setUsers((prev) => prev.map((u) => u.uid === selectedUid ? { ...u, tier: 2 } : u));
     setUpgrading(false);
@@ -71,7 +71,7 @@ const FundUserForm = () => {
     setSelectedUid("");
     setShowDeleteConfirm(false);
     setDeleting(false);
-    setSuccess(`${user?.fullName}'s account removed.`);
+    setSuccess(`Account di ${user?.fullName} rimosso.`);
     setTimeout(() => setSuccess(""), 4000);
   };
 
@@ -86,9 +86,9 @@ const FundUserForm = () => {
         }}>
           <Users size={24} color="#4f46e5" />
         </div>
-        <p style={{ fontSize: 14, fontWeight: 700, color: "#111827", margin: "0 0 4px" }}>Load users</p>
+        <p style={{ fontSize: 14, fontWeight: 700, color: "#111827", margin: "0 0 4px" }}>Carica utenti</p>
         <p style={{ fontSize: 12, color: "#9ca3af", margin: "0 0 20px", lineHeight: 1.6 }}>
-          Fetch all user accounts to fund, upgrade, or remove them
+          Recupera tutti gli account utente per finanziarli, aggiornarli o rimuoverli
         </p>
         <button
           onClick={fetchUsers}
@@ -102,7 +102,7 @@ const FundUserForm = () => {
           }}
         >
           <Search size={15} />
-          {fetching ? "Loading..." : "Load users"}
+          {fetching ? "Caricamento..." : "Carica utenti"}
         </button>
       </div>
     );
@@ -115,7 +115,7 @@ const FundUserForm = () => {
 
       {/* ── USER SELECT ── */}
       <div style={card}>
-        <span style={label}>Select user</span>
+        <span style={label}>Seleziona utente</span>
         <div style={{ position: "relative" }}>
           <select
             value={selectedUid}
@@ -131,7 +131,7 @@ const FundUserForm = () => {
               appearance: "none", cursor: "pointer",
             }}
           >
-            <option value="">Choose a user...</option>
+            <option value="">Scegli un utente...</option>
             {users.map((u) => (
               <option key={u.uid} value={u.uid}>
                 {u.fullName} — ${Number(u.balance || 0).toLocaleString()} · Tier {u.tier || 1}
@@ -172,7 +172,7 @@ const FundUserForm = () => {
 
       {/* ── AMOUNT ── */}
       <div style={card}>
-        <span style={label}>Amount to fund</span>
+        <span style={label}>Importo da finanziare</span>
         <div style={{ position: "relative", marginBottom: 12 }}>
           <span style={{
             position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)",
@@ -240,7 +240,7 @@ const FundUserForm = () => {
           display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
         }}
       >
-        {loading ? "Processing..." : "Fund account"}
+        {loading ? "Elaborazione..." : "Finanzia account"}
       </button>
 
       {/* ── UPGRADE TIER BUTTON ── */}
@@ -260,13 +260,13 @@ const FundUserForm = () => {
         }}
       >
         <ArrowUpCircle size={16} color={selectedUser?.tier === 2 ? "#16a34a" : "#6b7280"} />
-        {selectedUser?.tier === 2 ? "Already Tier 2" : upgrading ? "Upgrading..." : "Upgrade to Tier 2"}
+        {selectedUser?.tier === 2 ? "Già Tier 2" : upgrading ? "Aggiornamento..." : "Aggiorna a Tier 2"}
       </button>
 
       {/* ── DELETE USER ── */}
       {!showDeleteConfirm ? (
         <button
-          onClick={() => { if (!selectedUid) return setError("Please select a user first."); setShowDeleteConfirm(true); }}
+          onClick={() => { if (!selectedUid) return setError("Seleziona prima un utente."); setShowDeleteConfirm(true); }}
           style={{
             width: "100%", height: 48, borderRadius: 16,
             background: "#fff1f2", border: "1px solid #fecdd3",
@@ -276,7 +276,7 @@ const FundUserForm = () => {
           }}
         >
           <Trash2 size={16} />
-          Delete user account
+          Elimina account utente
         </button>
       ) : (
         /* ── DELETE CONFIRM INLINE ── */
@@ -293,9 +293,9 @@ const FundUserForm = () => {
               <AlertTriangle size={18} color="#e11d48" />
             </div>
             <div>
-              <p style={{ fontSize: 13, fontWeight: 700, color: "#e11d48", margin: 0 }}>Delete this account?</p>
+              <p style={{ fontSize: 13, fontWeight: 700, color: "#e11d48", margin: 0 }}>Eliminare questo account?</p>
               <p style={{ fontSize: 11, color: "#f43f5e", margin: 0 }}>
-                This removes <strong>{selectedUser?.fullName}</strong>'s Firestore data permanently.
+                Questo rimuove i dati di Firestore di <strong>{selectedUser?.fullName}</strong> definitivamente.
               </p>
             </div>
           </div>
@@ -309,7 +309,7 @@ const FundUserForm = () => {
                 cursor: "pointer", fontFamily: "inherit",
               }}
             >
-              Cancel
+              Annulla
             </button>
             <button
               onClick={handleDeleteUser}
@@ -321,7 +321,7 @@ const FundUserForm = () => {
                 cursor: deleting ? "not-allowed" : "pointer", fontFamily: "inherit",
               }}
             >
-              {deleting ? "Deleting..." : "Yes, delete"}
+              {deleting ? "Eliminazione..." : "Sì, elimina"}
             </button>
           </div>
         </div>

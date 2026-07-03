@@ -12,14 +12,14 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    if (!email || !password) return setError("Please fill in all fields.");
+    if (!email || !password) return setError("Compila tutti i campi.");
     setLoading(true);
     setError("");
     try {
       await loginUser(email, password);
       navigate("/dashboard");
     } catch {
-      setError("Invalid email or password. Please try again.");
+      setError("Email o password non valida. Riprova.");
     }
     setLoading(false);
   };
@@ -71,10 +71,10 @@ const Login = () => {
         </div>
 
         <h1 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: "0 0 6px", letterSpacing: "-0.4px" }}>
-          Welcome back
+          Bentornato
         </h1>
         <p style={{ fontSize: 14, color: "rgba(199,210,254,0.85)", margin: 0, fontWeight: 400 }}>
-          Sign in to your Milestone account
+          Accedi al tuo account Milestone
         </p>
       </div>
 
@@ -89,7 +89,7 @@ const Login = () => {
 
         {/* email */}
         <div style={inputWrap}>
-          <span style={label}>Email address</span>
+          <span style={label}>Indirizzo email</span>
           <div style={{ position: "relative" }}>
             <Mail size={16} color="#d1d5db" style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
             <input
@@ -122,7 +122,7 @@ const Login = () => {
                 position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)",
                 background: "none", border: "none", cursor: "pointer", color: "#9ca3af", padding: 0,
               }}
-              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-label={showPassword ? "Nascondi password" : "Mostra password"}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
@@ -132,7 +132,7 @@ const Login = () => {
         {/* forgot */}
         <div style={{ textAlign: "right", marginBottom: 20, marginTop: -6 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: "#4f46e5", cursor: "pointer" }}>
-            Forgot password?
+            Password dimenticata?
           </span>
         </div>
 

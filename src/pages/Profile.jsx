@@ -117,7 +117,7 @@ const Profile = () => {
 
         {/* balance */}
         <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8eaf0", padding: "14px 16px" }}>
-          <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.2px", textTransform: "uppercase", margin: "0 0 4px" }}>Balance</p>
+            <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.2px", textTransform: "uppercase", margin: "0 0 4px" }}>Saldo</p>
           <p style={{ fontSize: 15, fontWeight: 700, color: "#4f46e5", margin: 0, letterSpacing: "-0.3px" }}>
             ${Number(userData?.balance || 0).toLocaleString("en-US", { minimumFractionDigits: 2 })}
           </p>
@@ -125,7 +125,7 @@ const Profile = () => {
 
         {/* card */}
         <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8eaf0", padding: "14px 16px" }}>
-          <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.2px", textTransform: "uppercase", margin: "0 0 4px" }}>Card</p>
+          <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.2px", textTransform: "uppercase", margin: "0 0 4px" }}>Carta</p>
           <p style={{ fontSize: 15, fontWeight: 700, color: "#111827", margin: 0, letterSpacing: "1px" }}>
             •••• {userData?.cardNumber || "3245"}
           </p>
@@ -141,7 +141,7 @@ const Profile = () => {
         }}>
           <div>
             <p style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", letterSpacing: "1.2px", textTransform: "uppercase", margin: "0 0 4px" }}>
-              Account number
+              Numero conto
             </p>
             <p style={{ fontSize: 15, fontWeight: 700, color: "#111827", margin: 0, letterSpacing: "1.5px", fontVariantNumeric: "tabular-nums" }}>
               {accNumber}
@@ -174,7 +174,7 @@ const Profile = () => {
           }}>
             <Check size={13} color="#16a34a" />
             <span style={{ fontSize: 12, fontWeight: 600, color: "#15803d" }}>
-              Account number copied!
+              Numero conto copiato!
             </span>
           </div>
         )}
@@ -183,9 +183,9 @@ const Profile = () => {
       <div style={{ padding: "0 16px" }}>
         <span style={sectionTitle}>Account</span>
         <div style={card}>
-          <MenuItem icon={User} label="Personal info" sublabel={userData?.fullName} />
-          <MenuItem icon={Bell} label="Notifications" sublabel="Manage your alerts" iconBg="#fff7ed" iconColor="#f97316" />
-          <MenuItem icon={Lock} label="Security" sublabel="Password & PIN" iconBg="#f5f3ff" iconColor="#8b5cf6" />
+          <MenuItem icon={User} label="Informazioni personali" sublabel={userData?.fullName} />
+          <MenuItem icon={Bell} label="Notifiche" sublabel="Gestisci i tuoi avvisi" iconBg="#fff7ed" iconColor="#f97316" />
+          <MenuItem icon={Lock} label="Sicurezza" sublabel="Password e PIN" iconBg="#f5f3ff" iconColor="#8b5cf6" />
         </div>
 
         {!isTier2 && (
@@ -193,8 +193,8 @@ const Profile = () => {
             <span style={sectionTitle}>Membership</span>
             <div style={{ ...card, background: "linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)", border: "1px solid #fed7aa" }}>
               <MenuItem
-                icon={ArrowUpCircle} label="Upgrade to Tier 2"
-                sublabel="Contact support to unlock withdrawals"
+                icon={ArrowUpCircle} label="Aggiorna a Tier 2"
+                sublabel="Contatta il supporto per sbloccare i prelievi"
                 onClick={() => { setShowUpgrade(true); setShowContactInfo(false); }}
                 iconBg="#ffedd5" iconColor="#f97316"
               />
@@ -202,16 +202,16 @@ const Profile = () => {
           </>
         )}
 
-        <span style={sectionTitle}>More</span>
+        <span style={sectionTitle}>Altro</span>
         <div style={card}>
-          <MenuItem icon={HelpCircle} label="Support" sublabel="Chat with Milestone support" onClick={() => navigate("/support")} iconBg="#eff6ff" iconColor="#3b82f6" />
+          <MenuItem icon={HelpCircle} label="Supporto" sublabel="Chat con il supporto Milestone" onClick={() => navigate("/support")} iconBg="#eff6ff" iconColor="#3b82f6" />
           {userData?.role === "admin" && (
-            <MenuItem icon={Shield} label="Admin panel" sublabel="Manage users & support" onClick={() => navigate("/admin")} />
+            <MenuItem icon={Shield} label="Pannello admin" sublabel="Gestisci utenti e supporto" onClick={() => navigate("/admin")} />
           )}
         </div>
 
         <div style={card}>
-          <MenuItem icon={LogOut} label="Log out" danger onClick={() => setShowLogout(true)} />
+          <MenuItem icon={LogOut} label="Esci" danger onClick={() => setShowLogout(true)} />
         </div>
       </div>
 
@@ -225,26 +225,26 @@ const Profile = () => {
                 <div style={{ width: 64, height: 64, borderRadius: 20, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
                   <MessageCircle size={30} color="#3b82f6" />
                 </div>
-                <p style={{ fontSize: 18, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px", letterSpacing: "-0.3px" }}>Contact support</p>
+                <p style={{ fontSize: 18, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px", letterSpacing: "-0.3px" }}>Contatta il supporto</p>
                 <p style={{ fontSize: 13, color: "#9ca3af", textAlign: "center", margin: "0 0 20px", lineHeight: 1.6 }}>
-                  To upgrade your account to Tier 2, send a message to our support team. We'll verify and upgrade you — usually within minutes.
+                  Per aggiornare il tuo account a Tier 2, invia un messaggio al nostro team di supporto. Ti verificheremo e aggiorneremo — solitamente entro pochi minuti.
                 </p>
                 <div style={{ background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: 14, padding: "14px 16px", marginBottom: 20, display: "flex", alignItems: "flex-start", gap: 10 }}>
                   <MessageCircle size={16} color="#3b82f6" style={{ flexShrink: 0, marginTop: 1 }} />
                   <div>
-                    <p style={{ fontSize: 13, fontWeight: 700, color: "#1d4ed8", margin: "0 0 3px" }}>How it works</p>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: "#1d4ed8", margin: "0 0 3px" }}>Come funziona</p>
                     <p style={{ fontSize: 12, color: "#3b82f6", margin: 0, lineHeight: 1.6 }}>
-                      Open Support from the menu and send a message saying you'd like to upgrade to Tier 2. Our team will handle the rest.
+                      Apri Supporto dal menu e invia un messaggio dicendo che vorresti aggiornare a Tier 2. Il nostro team si occuperà del resto.
                     </p>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 10 }}>
-                  <button onClick={() => { setShowUpgrade(false); setShowContactInfo(false); }} style={cancelBtn}>Close</button>
+                  <button onClick={() => { setShowUpgrade(false); setShowContactInfo(false); }} style={cancelBtn}>Chiudi</button>
                   <button
                     onClick={() => { setShowUpgrade(false); setShowContactInfo(false); navigate("/support"); }}
                     style={{ flex: 2, height: 50, borderRadius: 14, background: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)", border: "none", fontSize: 14, fontWeight: 700, color: "#fff", cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}
                   >
-                    <MessageCircle size={15} /> Go to support
+                    <MessageCircle size={15} /> Vai al supporto
                   </button>
                 </div>
               </>
@@ -253,10 +253,10 @@ const Profile = () => {
                 <div style={{ width: 64, height: 64, borderRadius: 20, background: "#ffedd5", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
                   <ArrowUpCircle size={30} color="#f97316" />
                 </div>
-                <p style={{ fontSize: 18, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px", letterSpacing: "-0.3px" }}>Upgrade to Tier 2</p>
-                <p style={{ fontSize: 13, color: "#9ca3af", textAlign: "center", margin: "0 0 20px", lineHeight: 1.6 }}>Unlock the full Milestone experience — completely free.</p>
+                <p style={{ fontSize: 18, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px", letterSpacing: "-0.3px" }}>Aggiorna a Tier 2</p>
+                <p style={{ fontSize: 13, color: "#9ca3af", textAlign: "center", margin: "0 0 20px", lineHeight: 1.6 }}>Sblocca l'esperienza Milestone completa — completamente gratuita.</p>
                 <div style={{ background: "#f9fafb", borderRadius: 14, border: "1px solid #f0f1f8", padding: "4px 16px", marginBottom: 20 }}>
-                  {["Unlimited withdrawals", "Higher transaction limits", "Priority support", "Enhanced security"].map((f, i, arr) => (
+                  {["Prelievi illimitati", "Limiti di transazione superiori", "Supporto prioritario", "Sicurezza avanzata"].map((f, i, arr) => (
                     <div key={f} style={{ display: "flex", alignItems: "center", gap: 10, padding: "11px 0", borderBottom: i < arr.length - 1 ? "1px solid #f0f1f8" : "none" }}>
                       <div style={{ width: 24, height: 24, borderRadius: 8, flexShrink: 0, background: "#ffedd5", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <Shield size={12} color="#f97316" />
@@ -266,12 +266,12 @@ const Profile = () => {
                   ))}
                 </div>
                 <div style={{ display: "flex", gap: 10 }}>
-                  <button onClick={() => setShowUpgrade(false)} style={cancelBtn}>Cancel</button>
+                  <button onClick={() => setShowUpgrade(false)} style={cancelBtn}>Annulla</button>
                   <button
                     onClick={() => setShowContactInfo(true)}
                     style={{ flex: 2, height: 50, borderRadius: 14, background: "linear-gradient(135deg, #f97316 0%, #f59e0b 100%)", border: "none", fontSize: 14, fontWeight: 700, color: "#fff", cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}
                   >
-                    <MessageCircle size={15} /> Contact support
+                    <MessageCircle size={15} /> Contatta supporto
                   </button>
                 </div>
               </>
@@ -288,14 +288,14 @@ const Profile = () => {
             <div style={{ width: 64, height: 64, borderRadius: 20, background: "#fff1f2", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
               <LogOut size={28} color="#f87171" />
             </div>
-            <p style={{ fontSize: 17, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px" }}>Log out?</p>
+            <p style={{ fontSize: 17, fontWeight: 700, color: "#111827", textAlign: "center", margin: "0 0 6px" }}>Esci?</p>
             <p style={{ fontSize: 13, color: "#9ca3af", textAlign: "center", margin: "0 0 24px", lineHeight: 1.6 }}>
-              You'll need to sign back in to access your Milestone account.
+              Dovrai accedere di nuovo per accedere al tuo account Milestone.
             </p>
             <div style={{ display: "flex", gap: 10 }}>
-              <button onClick={() => setShowLogout(false)} style={cancelBtn}>Cancel</button>
+              <button onClick={() => setShowLogout(false)} style={cancelBtn}>Annulla</button>
               <button onClick={handleLogout} style={{ flex: 2, height: 50, borderRadius: 14, background: "linear-gradient(135deg, #ef4444 0%, #f87171 100%)", border: "none", fontSize: 14, fontWeight: 700, color: "#fff", cursor: "pointer", fontFamily: "inherit" }}>
-                Yes, log out
+                Sì, esci
               </button>
             </div>
           </div>

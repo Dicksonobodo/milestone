@@ -3,10 +3,10 @@ import { Home, CreditCard, ArrowLeftRight,  User, MessageCircle } from "lucide-r
 
 const tabs = [
   { to: "/dashboard", icon: Home, label: "Home" },
-  { to: "/transfer", icon: ArrowLeftRight, label: "Transfer" },
-  { to: "/withdraw", icon: CreditCard, label: "Cards" },
-  { to: "/support", icon: MessageCircle, label: "Support" },
-  { to: "/profile", icon: User, label: "Profile" },
+  { to: "/transfer", icon: ArrowLeftRight, label: "Trasferisci" },
+  { to: "/withdraw", icon: CreditCard, label: "Carte" },
+  { to: "/support", icon: MessageCircle, label: "Supporto" },
+  { to: "/profile", icon: User, label: "Profilo" },
 ];
 
 const BottomNav = ({ unreadSupport = false }) => {
@@ -33,7 +33,7 @@ const BottomNav = ({ unreadSupport = false }) => {
           >
             <div style={{ position: "relative" }}>
               <Icon size={22} color={active ? "#5b5bd6" : "#d1d5db"} strokeWidth={active ? 2.5 : 1.8} />
-              {label === "Support" && unreadSupport && (
+              {label === "Supporto" && unreadSupport && (
                 <span style={{ position: "absolute", top: 0, right: 0, width: "7px", height: "7px", background: "#ef4444", borderRadius: "50%", border: "1.5px solid #fff" }} />
               )}
             </div>

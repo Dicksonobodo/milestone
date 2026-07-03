@@ -13,15 +13,15 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!fullName || !email || !password) return setError("Please fill in all fields.");
-    if (password.length < 6) return setError("Password must be at least 6 characters.");
+    if (!fullName || !email || !password) return setError("Compila tutti i campi.");
+    if (password.length < 6) return setError("La password deve avere almeno 6 caratteri.");
     setLoading(true);
     setError("");
     try {
       await registerUser(email, password, fullName);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Registration failed. Please try again.");
+      setError(err.message || "Registrazione fallita. Riprova.");
     }
     setLoading(false);
   };
@@ -74,10 +74,10 @@ const Register = () => {
         </div>
 
         <h1 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: "0 0 6px", letterSpacing: "-0.4px" }}>
-          Create account
+          Crea account
         </h1>
         <p style={{ fontSize: 14, color: "rgba(199,210,254,0.85)", margin: 0, fontWeight: 400 }}>
-          Join Milestone Bank today — it's free
+          Unisciti a Milestone Bank oggi — è gratuito
         </p>
       </div>
 
@@ -92,14 +92,14 @@ const Register = () => {
 
         {/* full name */}
         <div style={inputWrap}>
-          <span style={label}>Full name</span>
+          <span style={label}>Nome completo</span>
           <div style={{ position: "relative" }}>
             <User size={16} color="#d1d5db" style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
             <input
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="John Doe"
+              placeholder="Mario Rossi"
               style={input}
             />
           </div>
@@ -107,7 +107,7 @@ const Register = () => {
 
         {/* email */}
         <div style={inputWrap}>
-          <span style={label}>Email address</span>
+          <span style={label}>Indirizzo email</span>
           <div style={{ position: "relative" }}>
             <Mail size={16} color="#d1d5db" style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
             <input
@@ -138,7 +138,7 @@ const Register = () => {
                 position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)",
                 background: "none", border: "none", cursor: "pointer", color: "#9ca3af", padding: 0,
               }}
-              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-label={showPassword ? "Nascondi password" : "Mostra password"}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>

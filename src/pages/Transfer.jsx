@@ -37,10 +37,10 @@ const Transfer = () => {
   };
 
   const handleTransfer = () => {
-    if (!selected) return setError("Please select a recipient.");
+    if (!selected) return setError("Seleziona un destinatario.");
     const num = parseFloat(amount);
-    if (!amount || isNaN(num) || num <= 0) return setError("Enter a valid amount.");
-    if (num > (userData?.balance || 0)) return setError("Insufficient balance.");
+    if (!amount || isNaN(num) || num <= 0) return setError("Inserisci un importo valido.");
+    if (num > (userData?.balance || 0)) return setError("Saldo insufficiente.");
     setError("");
     setShowConfirm(true);
   };
@@ -50,7 +50,7 @@ const Transfer = () => {
     await withdrawFunds(userData.uid, parseFloat(amount));
     await fundUserAccount(selected.uid, parseFloat(amount), userData.uid);
     await refreshUserData();
-    setSuccess(`$${parseFloat(amount).toLocaleString()} sent to ${selected.fullName}!`);
+    setSuccess(`$${parseFloat(amount).toLocaleString()} inviati a ${selected.fullName}!`);
     setAmount("");
     setSelected(null);
     setUsers([]);
@@ -104,7 +104,7 @@ const Transfer = () => {
             <ArrowLeft size={17} />
           </button>
           <span style={{ fontSize: 16, fontWeight: 600, color: "#fff", letterSpacing: "-0.2px" }}>
-            Transfer funds
+            Trasferisci fondi
           </span>
         </div>
 
@@ -120,7 +120,7 @@ const Transfer = () => {
         }}>
           <div>
             <p style={{ fontSize: 10, fontWeight: 600, color: "rgba(199,210,254,0.85)", letterSpacing: "1.4px", textTransform: "uppercase", marginBottom: 4 }}>
-              Available balance
+              Saldo disponibile
             </p>
             <p style={{ fontSize: 28, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", lineHeight: 1 }}>
               ${balance}
@@ -132,7 +132,7 @@ const Transfer = () => {
             border: "1px solid rgba(255,255,255,0.2)",
             borderRadius: 8, padding: "5px 12px",
           }}>
-            Wallet
+            Portafoglio
           </span>
         </div>
       </div>
@@ -154,14 +154,14 @@ const Transfer = () => {
 
         {/* ── FIND RECIPIENT ── */}
         <div style={card}>
-          <span style={sectionLabel}>Find recipient</span>
+          <span style={sectionLabel}>Trova destinatario</span>
           <div style={{ display: "flex", gap: 8 }}>
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              placeholder="Search by name..."
+              placeholder="Cerca per nome..."
               style={{
                 flex: 1, height: 44, borderRadius: 12,
                 border: "1px solid #e5e7eb",
@@ -188,13 +188,13 @@ const Transfer = () => {
 
           {searching && (
             <p style={{ textAlign: "center", fontSize: 12, color: "#9ca3af", fontWeight: 500, marginTop: 14 }}>
-              Searching...
+              Ricerca in corso...
             </p>
           )}
 
           {searched && !searching && users.length === 0 && (
             <p style={{ textAlign: "center", fontSize: 12, color: "#9ca3af", fontWeight: 500, marginTop: 14 }}>
-              No users found
+              Nessun utente trovato
             </p>
           )}
 
@@ -390,7 +390,7 @@ const Transfer = () => {
                   cursor: "pointer", fontFamily: "inherit",
                 }}
               >
-                Cancel
+                Annulla
               </button>
               <button
                 onClick={confirmTransfer}
@@ -404,7 +404,7 @@ const Transfer = () => {
                   fontFamily: "inherit", transition: "background 0.2s",
                 }}
               >
-                {loading ? "Processing..." : "Confirm & send"}
+                {loading ? "Elaborazione..." : "Conferma e invia"}
               </button>
             </div>
           </div>

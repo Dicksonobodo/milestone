@@ -36,7 +36,7 @@ const AdminPanel = () => {
               <Shield size={17} color="#fff" />
             </div>
             <div>
-              <p style={{ fontSize: 16, fontWeight: 700, color: "#fff", margin: 0, letterSpacing: "-0.2px" }}>Admin panel</p>
+              <p style={{ fontSize: 16, fontWeight: 700, color: "#fff", margin: 0, letterSpacing: "-0.2px" }}>Pannello admin</p>
               <p style={{ fontSize: 10, color: "rgba(199,210,254,0.8)", margin: 0, fontWeight: 500 }}>Milestone Bank</p>
             </div>
           </div>
@@ -50,8 +50,8 @@ const AdminPanel = () => {
           borderRadius: 14, padding: 4,
         }}>
           {[
-            { id: "fund", icon: Users, label: "Fund users" },
-            { id: "support", icon: MessageCircle, label: "Support" },
+            { id: "fund", icon: Users, label: "Finanzia utenti" },
+            { id: "support", icon: MessageCircle, label: "Supporto" },
           ].map(({ id, icon: Icon, label }) => (
             <button
               key={id}

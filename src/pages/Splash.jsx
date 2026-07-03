@@ -73,20 +73,20 @@ const Splash = () => {
       {/* Bottom */}
       <div style={{ background: "#fff", padding: "28px 22px 40px", borderRadius: "32px 32px 0 0", marginTop: "-20px", boxShadow: "0 -8px 40px rgba(0,0,0,.06)" }}>
         <h1 style={{ fontSize: "22px", fontWeight: 800, color: "#1a1a2e", lineHeight: 1.3, marginBottom: "8px" }}>
-          Sustainable solution<br />for the future
+          Soluzione sostenibile<br />per il futuro
         </h1>
         <p style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.65, marginBottom: "24px" }}>
-          With online safety features now<br />your money will be safe
+          Con le funzioni di sicurezza online ora<br />i tuoi soldi saranno al sicuro
         </p>
         <button
           onClick={() => navigate("/register")}
           style={{ width: "100%", padding: "16px", borderRadius: "16px", background: "#5b5bd6", color: "#fff", fontSize: "14px", fontWeight: 700, border: "none", cursor: "pointer" }}
         >
-          Get started
+          Inizia
         </button>
         <p style={{ textAlign: "center", marginTop: "14px", fontSize: "12px", color: "#9ca3af" }}>
-          Already have an account?{" "}
-          <span onClick={() => navigate("/login")} style={{ color: "#5b5bd6", fontWeight: 700, cursor: "pointer" }}>Sign in</span>
+          Hai già un account?{" "}
+          <span onClick={() => navigate("/login")} style={{ color: "#5b5bd6", fontWeight: 700, cursor: "pointer" }}>Accedi</span>
         </p>
       </div>
     </div>
