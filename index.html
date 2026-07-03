@@ -7,31 +7,51 @@
     <title>Milestone</title>
     <style>
       /* Keep the Smartsupp launcher above the bottom navigation */
-      [id*="smartsupp"],
-      [class*="smartsupp"],
-      iframe[src*="smartsupp"] {
-        bottom: 180px !important;
+      #smartsupp-widget-container {
+        bottom: 96px !important;
         right: 16px !important;
-        z-index: 9999 !important;
+        z-index: 2147483647 !important;
+      }
+
+      #smartsupp-widget-container [data-testid="widgetButtonFrame"],
+      #smartsupp-widget-container iframe#widgetButtonFrame {
+        bottom: 96px !important;
+        right: 16px !important;
+        left: auto !important;
+        z-index: 2147483647 !important;
       }
     </style>
     <script>
-      const repositionSmartsupp = () => {
-        const candidates = document.querySelectorAll(
-          'iframe[src*="smartsupp"], div[id*="smartsupp"], div[class*="smartsupp"], [id*="smartsupp-widget"], [class*="smartsupp-widget"]'
-        );
+      const applySmartsuppLayout = () => {
+        const container = document.getElementById('smartsupp-widget-container');
+        if (container) {
+          container.style.setProperty('bottom', '96px', 'important');
+          container.style.setProperty('right', '16px', 'important');
+          container.style.setProperty('z-index', '2147483647', 'important');
+        }
 
-        candidates.forEach((el) => {
-          el.style.setProperty('bottom', '180px', 'important');
-          el.style.setProperty('right', '16px', 'important');
-          el.style.setProperty('z-index', '9999', 'important');
-        });
+        const buttonFrame = document.querySelector('#smartsupp-widget-container [data-testid="widgetButtonFrame"]');
+        if (buttonFrame) {
+          buttonFrame.style.setProperty('bottom', '96px', 'important');
+          buttonFrame.style.setProperty('right', '16px', 'important');
+          buttonFrame.style.setProperty('left', 'auto', 'important');
+          buttonFrame.style.setProperty('z-index', '2147483647', 'important');
+        }
+
+        const buttonIframe = document.querySelector('#smartsupp-widget-container iframe#widgetButtonFrame');
+        if (buttonIframe) {
+          buttonIframe.style.setProperty('bottom', '96px', 'important');
+          buttonIframe.style.setProperty('right', '16px', 'important');
+          buttonIframe.style.setProperty('left', 'auto', 'important');
+          buttonIframe.style.setProperty('z-index', '2147483647', 'important');
+        }
       };
 
       const initSmartsuppPositioning = () => {
-        repositionSmartsupp();
-        const observer = new MutationObserver(repositionSmartsupp);
+        applySmartsuppLayout();
+        const observer = new MutationObserver(applySmartsuppLayout);
         observer.observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('load', applySmartsuppLayout);
       };
 
       if (document.readyState === 'loading') {
