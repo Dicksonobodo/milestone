@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Home, CreditCard, ArrowLeftRight,  User, MessageCircle } from "lucide-react";
 
 const tabs = [
-  { to: "/dashboard", icon: Home, label: "Home" },
+  { to: "/dashboard", icon: Home, label: "Home." },
   { to: "/transfer", icon: ArrowLeftRight, label: "Trasferisci" },
   { to: "/withdraw", icon: CreditCard, label: "Carte" },
   { to: "/support", icon: MessageCircle, label: "Supporto" },
