@@ -5,6 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Milestone</title>
+    <style>
+      /* Keep the Smartsupp launcher above the bottom navigation */
+      [id*="smartsupp"],
+      [class*="smartsupp"],
+      iframe[src*="smartsupp"] {
+        bottom: 92px !important;
+        right: 16px !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
