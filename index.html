@@ -5,48 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Milestone</title>
-    <style>
-      [id*="smartsupp"],
-      [class*="smartsupp"],
-      iframe[src*="smartsupp"] {
-        position: fixed !important;
-        bottom: 180px !important;
-        right: 16px !important;
-        z-index: 9999 !important;
-      }
-    </style>
-    <script>
-  const repositionSmartsupp = () => {
-    const btn = document.querySelector('[data-testid="widgetButton"], [aria-label="Open Smartsupp chat"]');
-    if (!btn) return;
-
-    // Walk up to the fixed-position wrapper that actually controls placement
-    const container = btn.closest('.fixed') || btn.parentElement;
-    if (container) {
-      container.style.setProperty('bottom', '180px', 'important');
-      container.style.setProperty('right', '16px', 'important');
-      container.style.setProperty('z-index', '9999', 'important');
-    }
-  };
-
-  const initSmartsuppPositioning = () => {
-    repositionSmartsupp();
-    const observer = new MutationObserver(repositionSmartsupp);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['style', 'class']
-    });
-    setInterval(repositionSmartsupp, 1000);
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSmartsuppPositioning);
-  } else {
-    initSmartsuppPositioning();
-  }
-</script>
   </head>
   <body>
     <div id="root"></div>
