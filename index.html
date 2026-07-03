@@ -16,31 +16,37 @@
       }
     </style>
     <script>
-      const repositionSmartsupp = () => {
-        const candidates = document.querySelectorAll(
-          'iframe[src*="smartsupp"], div[id*="smartsupp"], div[class*="smartsupp"], [id*="smartsupp-widget"], [class*="smartsupp-widget"]'
-        );
+  const repositionSmartsupp = () => {
+    const btn = document.querySelector('[data-testid="widgetButton"], [aria-label="Open Smartsupp chat"]');
+    if (!btn) return;
 
-        candidates.forEach((el) => {
-          el.style.setProperty('position', 'fixed', 'important');
-          el.style.setProperty('bottom', '180px', 'important');
-          el.style.setProperty('right', '16px', 'important');
-          el.style.setProperty('z-index', '9999', 'important');
-        });
-      };
+    // Walk up to the fixed-position wrapper that actually controls placement
+    const container = btn.closest('.fixed') || btn.parentElement;
+    if (container) {
+      container.style.setProperty('bottom', '180px', 'important');
+      container.style.setProperty('right', '16px', 'important');
+      container.style.setProperty('z-index', '9999', 'important');
+    }
+  };
 
-      const initSmartsuppPositioning = () => {
-        repositionSmartsupp();
-        const observer = new MutationObserver(repositionSmartsupp);
-        observer.observe(document.body, { childList: true, subtree: true });
-      };
+  const initSmartsuppPositioning = () => {
+    repositionSmartsupp();
+    const observer = new MutationObserver(repositionSmartsupp);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+    setInterval(repositionSmartsupp, 1000);
+  };
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSmartsuppPositioning);
-      } else {
-        initSmartsuppPositioning();
-      }
-    </script>
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSmartsuppPositioning);
+  } else {
+    initSmartsuppPositioning();
+  }
+</script>
   </head>
   <body>
     <div id="root"></div>
