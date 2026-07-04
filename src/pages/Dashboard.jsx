@@ -59,7 +59,7 @@ const Dashboard = () => {
       {/* Chart */}
       <div style={{ margin: "16px", background: "#fff", borderRadius: "20px", padding: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}>Marzo, 2023</span>
+          <span style={{ fontSize: "13px", fontWeight: 800, color: "#1a1a2e" }}></span>
           <span style={{ fontSize: "11px", color: "#aaa", fontWeight: 600 }}>Mensile ▾</span>
         </div>
         <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
