@@ -1,16 +1,34 @@
-# React + Vite
+# Milestone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Milestone is a responsive account dashboard built with React, Vite, and Firebase. It provides account access, balance and activity views, transfers, withdrawals, profile management, customer support, and admin tools.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Firebase email/password authentication.
+- Account dashboard with recent spending trends and transaction summaries.
+- Searchable transaction history with income/expense filters and paginated loading.
+- Transfer and withdrawal flows.
+- Profile, support, and admin screens.
 
-## React Compiler
+Dashboard summaries use recent Firestore activity, while the history page can load older transactions on demand. Empty accounts show an honest empty state rather than sample activity.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development
 
-## Expanding the ESLint configuration
+Install dependencies and start the local development server:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm install
+npm run dev
+```
+
+Create a production build with:
+
+```sh
+npm run build
+```
+
+Run the repository linter with:
+
+```sh
+npm run lint
+```

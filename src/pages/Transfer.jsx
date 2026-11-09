@@ -85,7 +85,7 @@ const Transfer = () => {
   };
 
   return (
-    <div style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column", paddingBottom: 88 }}>
+    <div className="narrow-page" style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column", paddingBottom: 88 }}>
 
       {/* ── HERO ── */}
       <div style={{ background: "linear-gradient(160deg, #3730a3 0%, #4f46e5 100%)", padding: "56px 20px 24px" }}>

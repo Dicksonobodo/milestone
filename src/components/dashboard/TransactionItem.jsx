@@ -11,14 +11,18 @@ const iconMap = {
 };
 
 const TransactionItem = ({ transaction }) => {
-  const { description, amount, type, date } = transaction;
+  const { amount, type, date } = transaction;
+  const description = transaction.description || "Transazione";
   const config = iconMap[description] || iconMap.Default;
   const Icon = config.icon;
   const isCredit = type === "credit";
 
-  const formattedDate = date?.toDate
-    ? date.toDate().toLocaleDateString("en-US", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
-    : "";
+  const transactionDate = date
+    ? typeof date.toDate === "function" ? date.toDate() : new Date(date)
+    : null;
+  const formattedDate = transactionDate && !Number.isNaN(transactionDate.getTime())
+    ? transactionDate.toLocaleDateString("it-IT", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })
+    : "Data non disponibile";
 
   return (
     <div className="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
@@ -32,7 +36,7 @@ const TransactionItem = ({ transaction }) => {
         </div>
       </div>
       <div className={`text-sm font-extrabold ${isCredit ? "text-emerald-500" : "text-red-400"}`}>
-        {isCredit ? "+" : "−"}${Number(amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+        {isCredit ? "+" : "−"}${Number(amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
     </div>
   );

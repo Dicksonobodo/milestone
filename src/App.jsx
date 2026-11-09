@@ -12,6 +12,7 @@ import Transfer from "./pages/Transfer";
 import Profile from "./pages/Profile";
 import Support from "./pages/Support";
 import AdminPanel from "./pages/AdminPanel";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/transfer" element={<PrivateRoute><Transfer /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/support" element={<PrivateRoute><Support /></PrivateRoute>} />
+          <Route path="/transactions" element={<PrivateRoute><Transactions /></PrivateRoute>} />
 
           {/* Protected - Admin */}
           <Route path="/admin" element={<PrivateRoute><AdminRoute><AdminPanel /></AdminRoute></PrivateRoute>} />

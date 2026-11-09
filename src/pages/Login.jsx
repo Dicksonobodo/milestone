@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column" }}>
+    <div className="narrow-page" style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column" }}>
 
       {/* ── HERO ── */}
       <div style={{ background: "linear-gradient(160deg, #3730a3 0%, #4f46e5 100%)", padding: "52px 20px 48px" }}>

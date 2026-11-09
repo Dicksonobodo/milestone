@@ -12,6 +12,7 @@ import {
   query,
   orderBy,
   limit,
+  startAfter,
 } from "firebase/firestore";
 
 // Get single user
@@ -55,14 +56,19 @@ export const deleteUserDoc = async (uid) => {
 };
 
 // Get recent transactions
-export const getTransactions = async (uid) => {
+export const getTransactions = async (uid, pageSize = 50, cursor = null) => {
   const q = query(
     collection(db, "users", uid, "transactions"),
     orderBy("date", "desc"),
-    limit(10)
+    ...(cursor ? [startAfter(cursor)] : []),
+    limit(pageSize),
   );
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  return {
+    transactions: snap.docs.map((d) => ({ id: d.id, ...d.data() })),
+    cursor: snap.docs[snap.docs.length - 1] || null,
+    hasMore: snap.docs.length === pageSize,
+  };
 };
 
 // Withdraw funds

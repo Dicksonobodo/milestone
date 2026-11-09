@@ -4,7 +4,7 @@ const Splash = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+    <div className="narrow-page" style={{ minHeight: "100vh", background: "#fff", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Top card area */}
       <div style={{ flex: 1, background: "#eef0fb", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", minHeight: "360px" }}>
         {/* Blobs */}

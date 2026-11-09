@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { logoutUser } from "../firebase/auth";
 import BottomNav from "../components/ui/BottomNav";
 import {
-  ChevronRight, User, Bell, Lock, HelpCircle,
+  ChevronRight, User, Bell, Lock, HelpCircle, CreditCard,
   ArrowUpCircle, Shield, LogOut, MessageCircle, Copy, Check,
 } from "lucide-react";
 
@@ -83,7 +83,7 @@ const Profile = () => {
   };
 
   return (
-    <div style={{ minHeight: "100svh", background: "#f0f1f8", paddingBottom: 88 }}>
+    <div className="narrow-page" style={{ minHeight: "100svh", background: "#f0f1f8", paddingBottom: 88 }}>
 
       {/* ── HERO ── */}
       <div style={{ background: "linear-gradient(160deg, #3730a3 0%, #4f46e5 100%)", padding: "52px 20px 24px" }}>
@@ -204,6 +204,7 @@ const Profile = () => {
 
         <span style={sectionTitle}>Altro</span>
         <div style={card}>
+          <MenuItem icon={CreditCard} label="Transazioni" sublabel="Consulta entrate e uscite" onClick={() => navigate("/transactions")} iconBg="#f0efff" iconColor="#5555cf" />
           <MenuItem icon={HelpCircle} label="Supporto" sublabel="Chat con il supporto Milestone" onClick={() => navigate("/support")} iconBg="#eff6ff" iconColor="#3b82f6" />
           {userData?.role === "admin" && (
             <MenuItem icon={Shield} label="Pannello admin" sublabel="Gestisci utenti e supporto" onClick={() => navigate("/admin")} />

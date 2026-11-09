@@ -16,8 +16,8 @@ const Support = () => {
         window._smartsupp.open();
         return;
       }
-    } catch (e) {
-      // ignore
+    } catch (error) {
+      console.error("Unable to open the support chat widget.", error);
     }
     window.open("https://www.smartsuppchat.com", "_blank");
   };
@@ -28,7 +28,7 @@ const Support = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column", paddingBottom: 88 }}>
+    <div className="narrow-page" style={{ minHeight: "100svh", background: "#f0f1f8", display: "flex", flexDirection: "column", paddingBottom: 88 }}>
       <div style={{ background: "linear-gradient(160deg, #3730a3 0%, #4f46e5 100%)", padding: "52px 20px 20px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button

@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, CreditCard, ArrowLeftRight,  User, MessageCircle } from "lucide-react";
+import { Home, CreditCard, ArrowLeftRight, User, MessageCircle } from "lucide-react";
 
 const tabs = [
-  { to: "/dashboard", icon: Home, label: "Home." },
+  { to: "/dashboard", icon: Home, label: "Home" },
   { to: "/transfer", icon: ArrowLeftRight, label: "Trasferisci" },
   { to: "/withdraw", icon: CreditCard, label: "Carte" },
   { to: "/support", icon: MessageCircle, label: "Supporto" },
@@ -14,33 +14,26 @@ const BottomNav = ({ unreadSupport = false }) => {
   const navigate = useNavigate();
 
   return (
-   <nav style={{
-  position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)",
-  width: "100%", maxWidth: "430px", background: "#fff",
-  borderTop: "1px solid #f0f0f8", display: "flex", zIndex: 40,
-  padding: "10px 56px 16px 0", boxSizing: "border-box"
-}}>
+    <nav className="bottom-nav" aria-label="Navigazione principale">
       {tabs.map(({ to, icon: Icon, label }) => {
-        const active = location.pathname === to;
+        const active =
+          location.pathname === to ||
+          (location.pathname === "/transactions" && to === "/dashboard");
         return (
           <button
             key={to}
             onClick={() => navigate(to)}
-            style={{
-              flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
-              gap: "3px", background: "none", border: "none", cursor: "pointer", padding: "0 4px"
-            }}
+            className={`bottom-nav__item${active ? " is-active" : ""}`}
+            aria-label={label}
+            aria-current={active ? "page" : undefined}
           >
-            <div style={{ position: "relative" }}>
-              <Icon size={22} color={active ? "#5b5bd6" : "#d1d5db"} strokeWidth={active ? 2.5 : 1.8} />
+            <div className="bottom-nav__icon">
+              <Icon size={21} strokeWidth={active ? 2.4 : 1.8} />
               {label === "Supporto" && unreadSupport && (
-                <span style={{ position: "absolute", top: 0, right: 0, width: "7px", height: "7px", background: "#ef4444", borderRadius: "50%", border: "1.5px solid #fff" }} />
+                <span className="bottom-nav__badge" />
               )}
             </div>
-            {active
-              ? <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#5b5bd6" }} />
-              : <span style={{ fontSize: "9px", fontWeight: 700, color: "#d1d5db" }}>{label}</span>
-            }
+            <span className="bottom-nav__label">{label}</span>
           </button>
         );
       })}
